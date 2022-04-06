@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Id</title>
+    <style>
+        #box-1 {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+        #box-2{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box-1"></div>
+    <div id="box-2"></div>
+
+    <script>
+        const box1 = document.getElementById("box-1");
+        console.log("box1: ", box1);
+        const box2 = document.querySelector("#box-2");
+        console.log("box2: ", box2);
+    </script>
+</body>
+
+</html>

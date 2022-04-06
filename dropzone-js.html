@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>dropzone</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: chocolate;
+        }
+        .drop {
+            width: 200px;
+            height: 200px;
+            background-color: azure;
+            border: red 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="c1" class="box" draggable="true"></div>
+    <div id="c2" class="box" draggable="true"></div>
+
+    <div class="drop" dropzone="copy"></div>
+
+    <script>
+        var dropZone = null
+        console.log("dropZone ANTES", dropZone);
+        const caixas = document.querySelectorAll('.box');
+        dropZone = document.querySelector('.drop');
+        console.log("dropZone DEPOIS", dropZone);
+        // exemple; const dropZone = document.querySelector('[dropzone]');
+
+        // ele faz um for para cada caixa e adiciona o evento de arrastar
+        caixas.forEach(caixa => {
+            console.log("caixa ANTES", caixa);
+            caixa.addEventListener('dragstart', e => {
+                console.log(e)
+                console.log("DENTRO DO FOR DA CAIXA ANTES", e.dataTransfer.getData('Text'));
+                e.dataTransfer.setData('Text', e.target.id);
+                console.log("DENTRO DO FOR DA CAIXA DEPOIS", e.dataTransfer.getData("Text"));
+                console.log(e.target.id);
+            });
+        })
+        
+        // Por padrão o navegador cancela o evento de arrastar e solta o elemento no lugar
+        // Se o evento for cancelado, ele não vai para o dropzone
+        // O evento abaixo cancela o comportamente padrão do navegador
+        // Se o evento padrão for cancelado, ele vai para o dropzone
+        dropZone.addEventListener('dragover', e => {
+            e.preventDefault();
+        });
+        
+        // adiciona o evento de soltar
+        dropZone.addEventListener('drop', e => {
+           console.log(e.dataTransfer.getData('Text'));
+            const id = e.dataTransfer.getData('Text');
+            const element = document.getElementById(id);
+            dropZone.appendChild(element);
+        })
+    </script>
+</body>
+
+</html>
